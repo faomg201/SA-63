@@ -36,7 +36,7 @@ func (ctl *MainingreController) CreateMainingre(c *gin.Context) {
 		return
 	}
 
-	u, err := ctl.client.Mainingre.
+	m, err := ctl.client.Mainingre.
 		Create().
 		SetMAININGREDIENTNAME(obj.MAININGREDIENTNAME).
 		Save(context.Background())
@@ -48,7 +48,7 @@ func (ctl *MainingreController) CreateMainingre(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, u)
+	c.JSON(200, m)
 }
 
 // GetMainingre handles GET requests to retrieve a mainingre entity
@@ -70,7 +70,7 @@ func (ctl *MainingreController) GetMainingre(c *gin.Context) {
 		})
 		return
 	}
-	u, err := ctl.client.Mainingre.
+	m, err := ctl.client.Mainingre.
 		Query().
 		Where(mainingre.IDEQ(int(id))).
 		Only(context.Background())
@@ -82,7 +82,7 @@ func (ctl *MainingreController) GetMainingre(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, u)
+	c.JSON(200, m)
 }
 
 // ListMainingre handles request to get a list of mainingre entities
@@ -194,7 +194,7 @@ func (ctl *MainingreController) UpdateMainingre(c *gin.Context) {
 	}
 	obj.ID = int(id)
 	fmt.Println(obj.ID)
-	u, err := ctl.client.Mainingre.
+	m, err := ctl.client.Mainingre.
 		UpdateOneID(int(id)).
 		SetMAININGREDIENTNAME(obj.MAININGREDIENTNAME).
 		Save(context.Background())
@@ -205,19 +205,19 @@ func (ctl *MainingreController) UpdateMainingre(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, u)
+	c.JSON(200, m)
 }
 
 // NewMainingreController creates and registers handles for the mainingre controller
 func NewMainingreController(router gin.IRouter, client *ent.Client) *MainingreController {
-	uc := &MainingreController{
+	mc := &MainingreController{
 		client: client,
 		router: router,
 	}
 
-	uc.register()
+	mc.register()
 
-	return uc
+	return mc
 
 }
 

@@ -36,7 +36,7 @@ func (ctl *FOODMENUController) CreateFOODMENU(c *gin.Context) {
 		return
 	}
 
-	u, err := ctl.client.FOODMENU.
+	f, err := ctl.client.FOODMENU.
 		Create().
 		SetFOODMENUNAME(obj.FOODMENUNAME).
 		Save(context.Background())
@@ -48,7 +48,7 @@ func (ctl *FOODMENUController) CreateFOODMENU(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, u)
+	c.JSON(200, f)
 }
 
 // GetFOODMENU handles GET requests to retrieve a foodmenu entity
@@ -70,7 +70,7 @@ func (ctl *FOODMENUController) GetFOODMENU(c *gin.Context) {
 		})
 		return
 	}
-	u, err := ctl.client.FOODMENU.
+	f, err := ctl.client.FOODMENU.
 		Query().
 		Where(foodmenu.IDEQ(int(id))).
 		Only(context.Background())
@@ -82,7 +82,7 @@ func (ctl *FOODMENUController) GetFOODMENU(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, u)
+	c.JSON(200, f)
 }
 
 // ListFOODMENU handles request to get a list of foodmenu entities
@@ -194,7 +194,7 @@ func (ctl *FOODMENUController) UpdateFOODMENU(c *gin.Context) {
 	}
 	obj.ID = int(id)
 	fmt.Println(obj.ID)
-	u, err := ctl.client.FOODMENU.
+	f, err := ctl.client.FOODMENU.
 		UpdateOneID(int(id)).
 		SetFOODMENUNAME(obj.FOODMENUNAME).
 		Save(context.Background())
@@ -205,19 +205,19 @@ func (ctl *FOODMENUController) UpdateFOODMENU(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, u)
+	c.JSON(200, f)
 }
 
 // NewFOODMENUController creates and registers handles for the foodmenu controller
 func NewFOODMENUController(router gin.IRouter, client *ent.Client) *FOODMENUController {
-	uc := &FOODMENUController{
+	fc := &FOODMENUController{
 		client: client,
 		router: router,
 	}
 
-	uc.register()
+	fc.register()
 
-	return uc
+	return fc
 
 }
 

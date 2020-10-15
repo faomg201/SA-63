@@ -36,7 +36,7 @@ func (ctl *SourceController) CreateSource(c *gin.Context) {
 		return
 	}
 
-	u, err := ctl.client.Source.
+	s, err := ctl.client.Source.
 		Create().
 		SetSOURCENAME(obj.SOURCENAME).
 		SetSOURCEADDRESS(obj.SOURCEADDRESS).
@@ -50,7 +50,7 @@ func (ctl *SourceController) CreateSource(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, u)
+	c.JSON(200, s)
 }
 
 // GetSource handles GET requests to retrieve a source entity
@@ -72,7 +72,7 @@ func (ctl *SourceController) GetSource(c *gin.Context) {
 		})
 		return
 	}
-	u, err := ctl.client.Source.
+	s, err := ctl.client.Source.
 		Query().
 		Where(source.IDEQ(int(id))).
 		Only(context.Background())
@@ -84,7 +84,7 @@ func (ctl *SourceController) GetSource(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, u)
+	c.JSON(200, s)
 }
 
 // ListSource handles request to get a list of source entities
@@ -196,7 +196,7 @@ func (ctl *SourceController) UpdateSource(c *gin.Context) {
 	}
 	obj.ID = int(id)
 	fmt.Println(obj.ID)
-	u, err := ctl.client.Source.
+	s, err := ctl.client.Source.
 		UpdateOneID(int(id)).
 		SetSOURCENAME(obj.SOURCENAME).
 		SetSOURCEADDRESS(obj.SOURCEADDRESS).
@@ -209,19 +209,19 @@ func (ctl *SourceController) UpdateSource(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, u)
+	c.JSON(200, s)
 }
 
 // NewSourceController creates and registers handles for the source controller
 func NewSourceController(router gin.IRouter, client *ent.Client) *SourceController {
-	uc := &SourceController{
+	sc := &SourceController{
 		client: client,
 		router: router,
 	}
 
-	uc.register()
+	sc.register()
 
-	return uc
+	return sc
 
 }
 
