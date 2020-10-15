@@ -19,6 +19,7 @@ import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 
+import { EntUser } from '../../api/models/EntUser';
 import { EntFOODMENU } from '../../api/models/EntFOODMENU';
 import { EntMainingre } from '../../api/models/EntMainingre';
 import { EntSource } from '../../api/models/EntSource';
@@ -58,7 +59,7 @@ export default function Create() {
   const api = new DefaultApi();
   const [loading, setLoading] = useState(true);
 
-  const [user, setUser] = useState(initialUserState);
+  const [users, setUser] = useState<EntUser[]>([]);
   const [foodmenus, setFOODMENU] = useState<EntFOODMENU[]>([]);
   const [mainingres, setMainingre] = useState<EntMainingre[]>([]);
   const [sources, setSource] = useState<EntSource[]>([]);
@@ -66,11 +67,19 @@ export default function Create() {
   const [status, setStatus] = useState(false);
   const [alert, setAlert] = useState(true);
 
+  const [userid, setUserID] = useState(Number);
   const [foodmenuid, setFOODMENUID] = useState(Number);
   const [mainingreid, setMainingreID] = useState(Number);
   const [sourceid, setSourceID] = useState(Number);
 
   useEffect(() => {    
+    const getUser = async () => {
+      const res = await api.listUser({ limit: 10, offset: 0 });
+      setLoading(false);
+      setUser(res);
+    };
+    getUser();
+
     const getFOODMENU = async () => {
       const res = await api.listFoodmenu({ limit: 10, offset: 0 });
       setLoading(false);
@@ -95,6 +104,10 @@ export default function Create() {
 
   }, [loading]);
 
+  const UserhandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setUserID(event.target.value as number);
+  };
+
   const FOODMENUhandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setFOODMENUID(event.target.value as number);
   };
@@ -112,7 +125,7 @@ export default function Create() {
       recordFOODMENU: foodmenuid,
       recordINGREDIENT: mainingreid,
       recordSOURCE: sourceid,
-      recordUSER: 2
+      recordUSER: userid
     };
     
     console.log(recordfood);
@@ -131,17 +144,37 @@ export default function Create() {
   return (
     <Page theme={pageTheme.home}>
       <Header
-        title={` ${profile.givenName || 'to Backstage'}`}
+        title={` ${profile.givenName || 'to Backstage'}` }
         subtitle=""
       ></Header>
       <Content>
       <ContentHeader  title="เพิ่มข้อมูลแหล่งที่มาของอาหาร">
-      <Typography align="left" style={{ marginRight: 16, color: "#00eeff" }}>
-            {username.givenuser}
-          </Typography>
-          <Button variant="contained" color="primary">
-              ออกจากระบบ
-          </Button>
+            <div>
+                <Button variant="contained" color='primary' size='large' >
+                    <font size='3'>ป้อนอีเมล์ผู้ใช้งาน</font>
+                </Button>                
+            </div>
+            <div>            
+              <FormControl 
+                className={classes.margin}
+                variant="outlined"
+              >
+                <InputLabel id="user-label">User Email</InputLabel>
+                <Select
+                  labelId="user-label"
+                  id="user"
+                  value={userid}
+                  onChange={UserhandleChange}
+                  style={{ width: 250 }}
+                >
+                {users.map((item: EntUser) => (
+                  <MenuItem value={item.id}>{item.uSEREMAIL}</MenuItem>
+                ))}
+                </Select>
+              </FormControl>
+            </div>
+            
+                
           {status ? (
             <div>
               {alert ? (
@@ -156,10 +189,17 @@ export default function Create() {
             </div>
           ) : null}
         </ContentHeader>
+        
      
         <div className={classes.root}>
           <form noValidate autoComplete="off">
-          <FormControl
+            <div>
+                <Button variant="contained" color='secondary' size='large'>
+                    <font size='3'>ชื่ออาหาร</font>
+                </Button>
+            </div>
+            <div>
+              <FormControl
                 className={classes.margin}
                 variant="outlined"
               >
@@ -176,7 +216,12 @@ export default function Create() {
                 ))}
                 </Select>
               </FormControl>
-
+            </div>
+            <div>
+                <Button variant="contained" color='secondary' size='large'>
+                    <font size='3'>ชื่อวัตถุดิบหลักก</font>
+                </Button>
+            </div>
             <div>
               <FormControl
                 className={classes.margin}
@@ -195,8 +240,12 @@ export default function Create() {
                 ))}
                 </Select>
               </FormControl>
+            <div>
+                <Button variant="contained" color='secondary' size='large'>
+                    <font size='3'>ชื่อร้านอาหาร</font>
+                </Button>
             </div>
-
+            </div>
             <FormControl
               className={classes.margin}
               variant="outlined"

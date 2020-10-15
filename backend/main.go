@@ -113,6 +113,7 @@ func main() {
 	// Set Users Data
 	users := Users{
 		User: []User{
+			User{"Makawan Thojan", "faomg201@gmail.com"},
 			User{"Chanwit Kaewkasi", "chanwit@gmail.com"},
 			User{"Name Surname", "me@example.com"},
 		},
@@ -132,6 +133,11 @@ func main() {
 			Foodmenu{"ราดหน้า"},
 			Foodmenu{"ผัดกระเพรา"},
 			Foodmenu{"ก๋วยเตี๋ยว"},
+			Foodmenu{"ไข่เจียว"},
+			Foodmenu{"ข้าวผัด"},
+			Foodmenu{"ผัดไทย"},
+			Foodmenu{"ข้าวต้ม"},
+			Foodmenu{"พะเเนง"},
 		},
 	}
 
@@ -149,6 +155,9 @@ func main() {
 			Mainingre{"กุ้ง"},
 			Mainingre{"ไก่"},
 			Mainingre{"ทะเล"},
+			Mainingre{"ปลา"},
+			Mainingre{"เครื่องใน"},
+			Mainingre{"หมึก"},
 		},
 	}
 
@@ -162,8 +171,10 @@ func main() {
 	// Set Sources Data
 	sources := Sources{
 		Source: []Source{
-			Source{"ร้านพี่กุ้ง", "123 ถนน...", "0871111111"},
-			Source{"ร้านอิ่มอร่อย", "114 ถนน...", "0935111111"},
+			Source{"ร้านพี่กุ้ง", "123 ถนนมหาวิทยาลัย ตำบลสุรนารี เมือง นครราชสีมา 30000", "0871111111"},
+			Source{"ร้านอิ่มอร่อย", "250 ถนนมหาวิทยาลัย ตำบลสุรนารี เมือง นครราชสีมา 30000", "0935111111"},
+			Source{"ร้านอร่อยเหาะ", "15 ถนนมหาวิทยาลัย ตำบลสุรนารี เมือง นครราชสีมา 30000", "0623455111"},
+			Source{"ร้านรสอุดม", "41 ถนนมหาวิทยาลัย ตำบลสุรนารี เมือง นครราชสีมา 30000", "0687155111"},
 		},
 	}
 

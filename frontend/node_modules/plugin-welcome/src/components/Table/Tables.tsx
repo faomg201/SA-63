@@ -50,7 +50,7 @@ export default function ComponentsTable() {
            <TableCell align="center">User Name</TableCell>
            <TableCell align="center">ชื่ออาหาร</TableCell>
            <TableCell align="center">วัตถุดิหลัก</TableCell>
-           <TableCell align="center">แหล่งที่มา</TableCell>
+           <TableCell align="center">ชื่อร้านอาหาร</TableCell>
            <TableCell align="center">ที่อยู่</TableCell>
            <TableCell align="center">เบอร์โทร</TableCell>
            </TableRow>
