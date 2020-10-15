@@ -166,52 +166,6 @@ func (ctl *SourceController) DeleteSource(c *gin.Context) {
 	c.JSON(200, gin.H{"result": fmt.Sprintf("ok deleted %v", id)})
 }
 
-// UpdateSource handles PUT requests to update a source entity
-// @Summary Update a source entity by ID
-// @Description update source by ID
-// @ID update-source
-// @Accept   json
-// @Produce  json
-// @Param id path int true "Source ID"
-// @Param source body ent.Source true "Source entity"
-// @Success 200 {object} ent.Source
-// @Failure 400 {object} gin.H
-// @Failure 500 {object} gin.H
-// @Router /sources/{id} [put]
-func (ctl *SourceController) UpdateSource(c *gin.Context) {
-	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
-	if err != nil {
-		c.JSON(400, gin.H{
-			"error": err.Error(),
-		})
-		return
-	}
-
-	obj := ent.Source{}
-	if err := c.ShouldBind(&obj); err != nil {
-		c.JSON(400, gin.H{
-			"error": "source binding failed",
-		})
-		return
-	}
-	obj.ID = int(id)
-	fmt.Println(obj.ID)
-	s, err := ctl.client.Source.
-		UpdateOneID(int(id)).
-		SetSOURCENAME(obj.SOURCENAME).
-		SetSOURCEADDRESS(obj.SOURCEADDRESS).
-		SetSOURCETLE(obj.SOURCETLE).
-		Save(context.Background())
-	if err != nil {
-		c.JSON(400, gin.H{
-			"error": "update failed",
-		})
-		return
-	}
-
-	c.JSON(200, s)
-}
-
 // NewSourceController creates and registers handles for the source controller
 func NewSourceController(router gin.IRouter, client *ent.Client) *SourceController {
 	sc := &SourceController{
@@ -233,6 +187,5 @@ func (ctl *SourceController) register() {
 	// CRUD
 	sources.POST("", ctl.CreateSource)
 	sources.GET(":id", ctl.GetSource)
-	sources.PUT(":id", ctl.UpdateSource)
 	sources.DELETE(":id", ctl.DeleteSource)
 }

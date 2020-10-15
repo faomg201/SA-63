@@ -278,39 +278,6 @@ paths:
           schema:
             $ref: '#/definitions/gin.H'
       summary: Get a foodmenu entity by ID
-    put:
-      consumes:
-      - application/json
-      description: update foodmenu by ID
-      operationId: update-foodmenu
-      parameters:
-      - description: FOODMENU ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: FOODMENU entity
-        in: body
-        name: foodmenu
-        required: true
-        schema:
-          $ref: '#/definitions/ent.FOODMENU'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/ent.FOODMENU'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/gin.H'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/gin.H'
-      summary: Update a foodmenu entity by ID
   /mainingres:
     get:
       description: list mainingre entities
@@ -429,39 +396,6 @@ paths:
           schema:
             $ref: '#/definitions/gin.H'
       summary: Get a mainingre entity by ID
-    put:
-      consumes:
-      - application/json
-      description: update mainingre by ID
-      operationId: update-mainingre
-      parameters:
-      - description: Mainingre ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Mainingre entity
-        in: body
-        name: mainingre
-        required: true
-        schema:
-          $ref: '#/definitions/ent.Mainingre'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/ent.Mainingre'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/gin.H'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/gin.H'
-      summary: Update a mainingre entity by ID
   /recordfoods:
     get:
       description: list recordfood entities
@@ -669,39 +603,6 @@ paths:
           schema:
             $ref: '#/definitions/gin.H'
       summary: Get a source entity by ID
-    put:
-      consumes:
-      - application/json
-      description: update source by ID
-      operationId: update-source
-      parameters:
-      - description: Source ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Source entity
-        in: body
-        name: source
-        required: true
-        schema:
-          $ref: '#/definitions/ent.Source'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/ent.Source'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/gin.H'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/gin.H'
-      summary: Update a source entity by ID
   /users:
     get:
       description: list user entities
@@ -820,39 +721,6 @@ paths:
           schema:
             $ref: '#/definitions/gin.H'
       summary: Get a user entity by ID
-    put:
-      consumes:
-      - application/json
-      description: update user by ID
-      operationId: update-user
-      parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: User entity
-        in: body
-        name: user
-        required: true
-        schema:
-          $ref: '#/definitions/ent.User'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/ent.User'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/gin.H'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/gin.H'
-      summary: Update a user entity by ID
 securityDefinitions:
   ApiKeyAuth:
     in: header

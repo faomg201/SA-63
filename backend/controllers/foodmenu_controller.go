@@ -163,51 +163,6 @@ func (ctl *FOODMENUController) DeleteFOODMENU(c *gin.Context) {
 
 	c.JSON(200, gin.H{"result": fmt.Sprintf("ok deleted %v", id)})
 }
-
-// UpdateFOODMENU handles PUT requests to update a foodmenu entity
-// @Summary Update a foodmenu entity by ID
-// @Description update foodmenu by ID
-// @ID update-foodmenu
-// @Accept   json
-// @Produce  json
-// @Param id path int true "FOODMENU ID"
-// @Param foodmenu body ent.FOODMENU true "FOODMENU entity"
-// @Success 200 {object} ent.FOODMENU
-// @Failure 400 {object} gin.H
-// @Failure 500 {object} gin.H
-// @Router /foodmenus/{id} [put]
-func (ctl *FOODMENUController) UpdateFOODMENU(c *gin.Context) {
-	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
-	if err != nil {
-		c.JSON(400, gin.H{
-			"error": err.Error(),
-		})
-		return
-	}
-
-	obj := ent.FOODMENU{}
-	if err := c.ShouldBind(&obj); err != nil {
-		c.JSON(400, gin.H{
-			"error": "foodmenu binding failed",
-		})
-		return
-	}
-	obj.ID = int(id)
-	fmt.Println(obj.ID)
-	f, err := ctl.client.FOODMENU.
-		UpdateOneID(int(id)).
-		SetFOODMENUNAME(obj.FOODMENUNAME).
-		Save(context.Background())
-	if err != nil {
-		c.JSON(400, gin.H{
-			"error": "update failed",
-		})
-		return
-	}
-
-	c.JSON(200, f)
-}
-
 // NewFOODMENUController creates and registers handles for the foodmenu controller
 func NewFOODMENUController(router gin.IRouter, client *ent.Client) *FOODMENUController {
 	fc := &FOODMENUController{
@@ -229,6 +184,5 @@ func (ctl *FOODMENUController) register() {
 	// CRUD
 	foodmenus.POST("", ctl.CreateFOODMENU)
 	foodmenus.GET(":id", ctl.GetFOODMENU)
-	foodmenus.PUT(":id", ctl.UpdateFOODMENU)
 	foodmenus.DELETE(":id", ctl.DeleteFOODMENU)
 }
