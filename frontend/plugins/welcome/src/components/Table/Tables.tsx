@@ -11,7 +11,6 @@ import Button from '@material-ui/core/Button';
 import { DefaultApi } from '../../api/apis';
 
 import { EntRecordfood } from '../../api/models/EntRecordfood';
-import { EntFOODMENU } from '../../api/models/EntFOODMENU';
  
 const useStyles = makeStyles({
  table: {
@@ -22,7 +21,6 @@ const useStyles = makeStyles({
 export default function ComponentsTable() {
  const classes = useStyles();
  const api = new DefaultApi();
- const [users, setUsers] = useState(Array);
  const [loading, setLoading] = useState(true);
 
  const [recordfoods, setRecordfoods] = useState<EntRecordfood[]>([]);
