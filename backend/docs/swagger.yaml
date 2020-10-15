@@ -1,0 +1,892 @@
+basePath: /api/v1
+definitions:
+  controllers.Recordfood:
+    properties:
+      recordFOODMENU:
+        type: integer
+      recordINGREDIENT:
+        type: integer
+      recordSOURCE:
+        type: integer
+      recordUSER:
+        type: integer
+    type: object
+  ent.FOODMENU:
+    properties:
+      FOODMENU_NAME:
+        description: FOODMENUNAME holds the value of the "FOODMENU_NAME" field.
+        type: string
+      edges:
+        $ref: '#/definitions/ent.FOODMENUEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the FOODMENUQuery when eager-loading is set.
+        type: object
+      id:
+        description: ID of the ent.
+        type: integer
+    type: object
+  ent.FOODMENUEdges:
+    properties:
+      foodmenurecord:
+        description: FOODMENURECORD holds the value of the FOODMENURECORD edge.
+        items:
+          $ref: '#/definitions/ent.Recordfood'
+        type: array
+    type: object
+  ent.Mainingre:
+    properties:
+      MAIN_INGREDIENT_NAME:
+        description: MAININGREDIENTNAME holds the value of the "MAIN_INGREDIENT_NAME" field.
+        type: string
+      edges:
+        $ref: '#/definitions/ent.MainingreEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the MainingreQuery when eager-loading is set.
+        type: object
+      id:
+        description: ID of the ent.
+        type: integer
+    type: object
+  ent.MainingreEdges:
+    properties:
+      mainingrerecord:
+        description: MAININGRERECORD holds the value of the MAININGRERECORD edge.
+        items:
+          $ref: '#/definitions/ent.Recordfood'
+        type: array
+    type: object
+  ent.Recordfood:
+    properties:
+      edges:
+        $ref: '#/definitions/ent.RecordfoodEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the RecordfoodQuery when eager-loading is set.
+        type: object
+      id:
+        description: ID of the ent.
+        type: integer
+    type: object
+  ent.RecordfoodEdges:
+    properties:
+      recordfoodmenu:
+        $ref: '#/definitions/ent.FOODMENU'
+        description: RECORDFOODMENU holds the value of the RECORD_FOODMENU edge.
+        type: object
+      recordingredient:
+        $ref: '#/definitions/ent.Mainingre'
+        description: RECORDINGREDIENT holds the value of the RECORD_INGREDIENT edge.
+        type: object
+      recordsource:
+        $ref: '#/definitions/ent.Source'
+        description: RECORDSOURCE holds the value of the RECORD_SOURCE edge.
+        type: object
+      recorduser:
+        $ref: '#/definitions/ent.User'
+        description: RECORDUSER holds the value of the RECORD_USER edge.
+        type: object
+    type: object
+  ent.Source:
+    properties:
+      SOURCE_ADDRESS:
+        description: SOURCEADDRESS holds the value of the "SOURCE_ADDRESS" field.
+        type: string
+      SOURCE_NAME:
+        description: SOURCENAME holds the value of the "SOURCE_NAME" field.
+        type: string
+      SOURCE_TLE:
+        description: SOURCETLE holds the value of the "SOURCE_TLE" field.
+        type: string
+      edges:
+        $ref: '#/definitions/ent.SourceEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the SourceQuery when eager-loading is set.
+        type: object
+      id:
+        description: ID of the ent.
+        type: integer
+    type: object
+  ent.SourceEdges:
+    properties:
+      sourcerecord:
+        description: SOURCERECORD holds the value of the SOURCERECORD edge.
+        items:
+          $ref: '#/definitions/ent.Recordfood'
+        type: array
+    type: object
+  ent.User:
+    properties:
+      USER_EMAIL:
+        description: USEREMAIL holds the value of the "USER_EMAIL" field.
+        type: string
+      USER_NAME:
+        description: USERNAME holds the value of the "USER_NAME" field.
+        type: string
+      edges:
+        $ref: '#/definitions/ent.UserEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the UserQuery when eager-loading is set.
+        type: object
+      id:
+        description: ID of the ent.
+        type: integer
+    type: object
+  ent.UserEdges:
+    properties:
+      userrecord:
+        description: USERRECORD holds the value of the USERRECORD edge.
+        items:
+          $ref: '#/definitions/ent.Recordfood'
+        type: array
+    type: object
+  gin.H:
+    additionalProperties: true
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server for SUT SE 2563
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: SUT SA Example API
+  version: "1.0"
+paths:
+  /foodmenus:
+    get:
+      description: list foodmenu entities
+      operationId: list-foodmenu
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.FOODMENU'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List foodmenu entities
+    post:
+      consumes:
+      - application/json
+      description: Create foodmenu
+      operationId: create-foodmenu
+      parameters:
+      - description: FOODMENU entity
+        in: body
+        name: foodmenu
+        required: true
+        schema:
+          $ref: '#/definitions/ent.FOODMENU'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.FOODMENU'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create foodmenu
+  /foodmenus/{id}:
+    delete:
+      description: get foodmenu by ID
+      operationId: delete-foodmenu
+      parameters:
+      - description: FOODMENU ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a foodmenu entity by ID
+    get:
+      description: get foodmenu by ID
+      operationId: get-foodmenu
+      parameters:
+      - description: FOODMENU ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.FOODMENU'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get a foodmenu entity by ID
+    put:
+      consumes:
+      - application/json
+      description: update foodmenu by ID
+      operationId: update-foodmenu
+      parameters:
+      - description: FOODMENU ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: FOODMENU entity
+        in: body
+        name: foodmenu
+        required: true
+        schema:
+          $ref: '#/definitions/ent.FOODMENU'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.FOODMENU'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a foodmenu entity by ID
+  /mainingres:
+    get:
+      description: list mainingre entities
+      operationId: list-mainingre
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.Mainingre'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List mainingre entities
+    post:
+      consumes:
+      - application/json
+      description: Create mainingre
+      operationId: create-mainingre
+      parameters:
+      - description: Mainingre entity
+        in: body
+        name: mainingre
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Mainingre'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Mainingre'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create mainingre
+  /mainingres/{id}:
+    delete:
+      description: get mainingre by ID
+      operationId: delete-mainingre
+      parameters:
+      - description: Mainingre ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a mainingre entity by ID
+    get:
+      description: get mainingre by ID
+      operationId: get-mainingre
+      parameters:
+      - description: Mainingre ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Mainingre'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get a mainingre entity by ID
+    put:
+      consumes:
+      - application/json
+      description: update mainingre by ID
+      operationId: update-mainingre
+      parameters:
+      - description: Mainingre ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Mainingre entity
+        in: body
+        name: mainingre
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Mainingre'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Mainingre'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a mainingre entity by ID
+  /recordfoods:
+    get:
+      description: list recordfood entities
+      operationId: list-recordfood
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.Recordfood'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List recordfood entities
+    post:
+      consumes:
+      - application/json
+      description: Create recordfood
+      operationId: create-recordfood
+      parameters:
+      - description: Recordfood entity
+        in: body
+        name: recordfood
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.Recordfood'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Recordfood'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create recordfood
+  /recordfoods/{id}:
+    delete:
+      description: get recordfood by ID
+      operationId: delete-recordfood
+      parameters:
+      - description: Recordfood ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a recordfood entity by ID
+  /sources:
+    get:
+      description: list source entities
+      operationId: list-source
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.Source'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List source entities
+    post:
+      consumes:
+      - application/json
+      description: Create source
+      operationId: create-source
+      parameters:
+      - description: Source entity
+        in: body
+        name: source
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Source'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Source'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create source
+  /sources/{id}:
+    delete:
+      description: get source by ID
+      operationId: delete-source
+      parameters:
+      - description: Source ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a source entity by ID
+    get:
+      description: get source by ID
+      operationId: get-source
+      parameters:
+      - description: Source ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Source'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get a source entity by ID
+    put:
+      consumes:
+      - application/json
+      description: update source by ID
+      operationId: update-source
+      parameters:
+      - description: Source ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Source entity
+        in: body
+        name: source
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Source'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Source'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a source entity by ID
+  /users:
+    get:
+      description: list user entities
+      operationId: list-user
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.User'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List user entities
+    post:
+      consumes:
+      - application/json
+      description: Create user
+      operationId: create-user
+      parameters:
+      - description: User entity
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/ent.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create user
+  /users/{id}:
+    delete:
+      description: get user by ID
+      operationId: delete-user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a user entity by ID
+    get:
+      description: get user by ID
+      operationId: get-user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get a user entity by ID
+    put:
+      consumes:
+      - application/json
+      description: update user by ID
+      operationId: update-user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: User entity
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/ent.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a user entity by ID
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+  BasicAuth:
+    type: basic
+  OAuth2AccessCode:
+    authorizationUrl: https://example.com/oauth/authorize
+    flow: accessCode
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+  OAuth2Application:
+    flow: application
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      write: ' Grants write access'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+  OAuth2Implicit:
+    authorizationUrl: https://example.com/oauth/authorize
+    flow: implicit
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      write: ' Grants write access'
+    type: oauth2
+  OAuth2Password:
+    flow: password
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      read: ' Grants read access'
+      write: ' Grants write access'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+swagger: "2.0"
