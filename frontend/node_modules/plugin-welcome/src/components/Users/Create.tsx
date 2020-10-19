@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
   Content,
@@ -60,7 +60,7 @@ export default function Create() {
   const [mainingreid, setMainingreID] = useState(Number);
   const [sourceid, setSourceID] = useState(Number);
 
-  useEffect(() => {    
+  useEffect(() => {
     const getUser = async () => {
       const res = await api.listUser({ limit: 10, offset: 0 });
       setLoading(false);
@@ -115,7 +115,7 @@ export default function Create() {
       recordSOURCE: sourceid,
       recordUSER: userid
     };
-    
+
     console.log(recordfood);
     const res: any = await api.createRecordfood({ recordfood: recordfood });
     setStatus(true);
@@ -129,37 +129,37 @@ export default function Create() {
   return (
     <Page theme={pageTheme.home}>
       <Header
-        title={` ${profile.givenName || 'to Backstage'}` }
+        title={` ${profile.givenName || 'to Backstage'}`}
         subtitle=""
       ></Header>
       <Content>
-      <ContentHeader  title="เพิ่มข้อมูลแหล่งที่มาของอาหาร">
-            <div>
-                <Button variant="contained" color='primary' size='large' >
-                    <font size='3'>ป้อนอีเมล์ผู้ใช้งาน</font>
-                </Button>                
-            </div>
-            <div>            
-              <FormControl 
-                className={classes.margin}
-                variant="outlined"
+        <ContentHeader title="เพิ่มข้อมูลแหล่งที่มาของอาหาร">
+          <div>
+            <Button variant="contained" color='primary' size='large' >
+              <font size='3'>ป้อนอีเมล์ผู้ใช้งาน</font>
+            </Button>
+          </div>
+          <div>
+            <FormControl
+              className={classes.margin}
+              variant="outlined"
+            >
+              <InputLabel id="user-label">User Email</InputLabel>
+              <Select
+                labelId="user-label"
+                id="user"
+                value={userid}
+                onChange={UserhandleChange}
+                style={{ width: 250 }}
               >
-                <InputLabel id="user-label">User Email</InputLabel>
-                <Select
-                  labelId="user-label"
-                  id="user"
-                  value={userid}
-                  onChange={UserhandleChange}
-                  style={{ width: 250 }}
-                >
                 {users.map((item: EntUser) => (
                   <MenuItem value={item.id}>{item.uSEREMAIL}</MenuItem>
                 ))}
-                </Select>
-              </FormControl>
-            </div>
-            
-                
+              </Select>
+            </FormControl>
+          </div>
+
+
           {status ? (
             <div>
               {alert ? (
@@ -174,14 +174,14 @@ export default function Create() {
             </div>
           ) : null}
         </ContentHeader>
-        
-     
+
+
         <div className={classes.root}>
           <form noValidate autoComplete="off">
             <div>
-                <Button variant="contained" color='secondary' size='large'>
-                    <font size='3'>ชื่ออาหาร</font>
-                </Button>
+              <Button variant="contained" color='secondary' size='large'>
+                <font size='3'>ชื่ออาหาร</font>
+              </Button>
             </div>
             <div>
               <FormControl
@@ -196,16 +196,16 @@ export default function Create() {
                   onChange={FOODMENUhandleChange}
                   style={{ width: 400 }}
                 >
-                {foodmenus.map((item: EntFOODMENU) => (
-                  <MenuItem value={item.id}>{item.fOODMENUNAME}</MenuItem>
-                ))}
+                  {foodmenus.map((item: EntFOODMENU) => (
+                    <MenuItem value={item.id}>{item.fOODMENUNAME}</MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </div>
             <div>
-                <Button variant="contained" color='secondary' size='large'>
-                    <font size='3'>ชื่อวัตถุดิบหลักก</font>
-                </Button>
+              <Button variant="contained" color='secondary' size='large'>
+                <font size='3'>ชื่อวัตถุดิบหลักก</font>
+              </Button>
             </div>
             <div>
               <FormControl
@@ -220,16 +220,16 @@ export default function Create() {
                   onChange={MainingrehandleChange}
                   style={{ width: 400 }}
                 >
-                {mainingres.map((item: EntMainingre) => (
-                  <MenuItem value={item.id}>{item.mAININGREDIENTNAME}</MenuItem>
-                ))}
+                  {mainingres.map((item: EntMainingre) => (
+                    <MenuItem value={item.id}>{item.mAININGREDIENTNAME}</MenuItem>
+                  ))}
                 </Select>
               </FormControl>
-            <div>
+              <div>
                 <Button variant="contained" color='secondary' size='large'>
-                    <font size='3'>ชื่อร้านอาหาร</font>
+                  <font size='3'>ชื่อร้านอาหาร</font>
                 </Button>
-            </div>
+              </div>
             </div>
             <FormControl
               className={classes.margin}
