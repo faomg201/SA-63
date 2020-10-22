@@ -24,7 +24,7 @@ const WelcomePage: FC<{}> = () => {
      ></Header>
      <Content>
        <ContentHeader title="Source">
-         <Link component={RouterLink} to="/user">
+         <Link component={RouterLink} to="/Recordfood">
            <Button variant="contained" color="primary">
              เพิ่มข้อมูล
            </Button>

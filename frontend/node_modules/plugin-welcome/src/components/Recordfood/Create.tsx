@@ -205,7 +205,7 @@ export default function Create() {
             </div>
             <div>
               <Button variant="contained" color='secondary' size='large'>
-                <font size='3'>ชื่อวัตถุดิบหลักก</font>
+                <font size='3'>ชื่อวัตถุดิบหลัก</font>
               </Button>
             </div>
             <div>
