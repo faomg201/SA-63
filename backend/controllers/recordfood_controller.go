@@ -94,7 +94,7 @@ func (ctl *RecordfoodController) CreateRecordfood(c *gin.Context) {
 		})
 		return
 	}
-
+//เซตด้วย obj
 	pv, err := ctl.client.Recordfood.
 		Create().
 		SetRECORDFOODMENU(rf).

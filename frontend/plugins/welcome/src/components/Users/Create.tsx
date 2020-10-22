@@ -47,6 +47,7 @@ export default function Create() {
   const api = new DefaultApi();
   const [loading, setLoading] = useState(true);
 
+  //กำหนดค่า ชื่อstate ชื่อฟังก์ชั่น เป็นการดึงค่า มาจากอัลเรย์
   const [users, setUser] = useState<EntUser[]>([]);
   const [foodmenus, setFOODMENU] = useState<EntFOODMENU[]>([]);
   const [mainingres, setMainingre] = useState<EntMainingre[]>([]);
