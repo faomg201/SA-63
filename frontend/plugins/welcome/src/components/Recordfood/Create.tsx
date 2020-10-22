@@ -47,7 +47,6 @@ export default function Create() {
   const api = new DefaultApi();
   const [loading, setLoading] = useState(true);
 
-  //กำหนดค่า ชื่อstate ชื่อฟังก์ชั่น เป็นการดึงค่า มาจากอัลเรย์
   const [users, setUser] = useState<EntUser[]>([]);
   const [foodmenus, setFOODMENU] = useState<EntFOODMENU[]>([]);
   const [mainingres, setMainingre] = useState<EntMainingre[]>([]);
@@ -168,8 +167,7 @@ export default function Create() {
                   บันทึกสำเร็จ
                 </Alert>
               ) : (
-                  <Alert severity="warning" style={{ marginTop: 20 }}>
-                    พบปัญหาระหว่างบันทึกข้อมูล
+                  <Alert severity="warning">
                   </Alert>
                 )}
             </div>

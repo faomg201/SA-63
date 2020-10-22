@@ -14,9 +14,9 @@ type Source struct {
 // Fields of the Source.
 func (Source) Fields() []ent.Field {
 	return []ent.Field{
-		field.String("SOURCE_NAME"),
-		field.String("SOURCE_ADDRESS"),
-		field.String("SOURCE_TLE"),
+		field.String("SOURCE_NAME").Unique(),
+		field.String("SOURCE_ADDRESS").Unique(),
+		field.String("SOURCE_TLE").Unique(),
 	}
 }
 

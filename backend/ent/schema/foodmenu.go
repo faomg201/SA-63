@@ -14,7 +14,7 @@ type FOODMENU struct {
 // Fields of the FOODMENU.
 func (FOODMENU) Fields() []ent.Field {
 	return []ent.Field{
-		field.String("FOODMENU_NAME"),
+		field.String("FOODMENU_NAME").Unique(),
 	}
 }
 

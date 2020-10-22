@@ -14,7 +14,7 @@ type Mainingre struct {
 // Fields of the Mainingre.
 func (Mainingre) Fields() []ent.Field {
 	return []ent.Field{
-		field.String("MAIN_INGREDIENT_NAME"),
+		field.String("MAIN_INGREDIENT_NAME").Unique(),
 	}
 }
 
