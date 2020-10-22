@@ -114,7 +114,7 @@ func main() {
 	users := Users{
 		User: []User{
 			User{"Makawan Thojan", "faomg201@gmail.com"},
-			User{"Chanwit Kaewkasi", "chanwit@gmail.com"},
+			User{"Nomai	Sakadi", "nomai@gmail.com"},
 			User{"Name Surname", "me@example.com"},
 		},
 	}
